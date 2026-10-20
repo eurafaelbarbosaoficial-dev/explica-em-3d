@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Explica em 3D">
+<meta property="og:description" content="O método pra criar vídeos 3D explicativos que passam de 1 milhão de views.">
+<meta property="og:image" content="v/hero.jpg">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Explica em 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="E-book: o método pra criar vídeos 3D explicativos que passam de 1 milhão de views no Reels, TikTok e Shorts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700&display=swap">
+<style>
+/* Layout: a low-poly "cenário" — céu no topo, gramado como chão do hero, parede creme no resto; vídeos em telas de celular. */
+:root{
+  color-scheme: light;
+  --sky:#7cc8f6;
+  --sky-deep:#3f9fe0;
+  --grass:#5bb849;
+  --grass-dark:#3f8f33;
+  --wall:#f6f1e7;
+  --wall-2:#ece4d3;
+  --ink:#16202c;
+  --ink-soft:#4a5563;
+  --label:#ffc928;
+  --copper:#c9713d;
+  --white:#ffffff;
+  --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--wall);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+h1,h2,h3{font-family:var(--display);line-height:1.05;text-wrap:balance;margin:0;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky-deep);outline-offset:3px;border-radius:6px}
+
+/* Assinatura dos vídeos: rótulo amarelo inclinado com contorno, e legenda branca contornada */
+.tag{display:inline-block;font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:14px;color:var(--label);
+  -webkit-text-stroke:5px var(--ink);paint-order:stroke fill;transform:rotate(-3deg);transform-origin:left center}
+.cap{color:var(--white);-webkit-text-stroke:8px var(--ink);paint-order:stroke fill}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;
+  background:var(--label);color:var(--ink);text-decoration:none;padding:16px 28px;border-radius:14px;border:3px solid var(--ink);
+  box-shadow:0 5px 0 var(--ink);transition:transform .12s, box-shadow .12s;cursor:pointer}
+.btn:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--ink)}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--ink)}
+.btn small{font-family:var(--body);font-weight:500;font-size:14px;opacity:.75}
+
+/* HERO */
+.hero{background:linear-gradient(180deg,var(--sky-deep) 0%,var(--sky) 62%,#bfe5fb 100%);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-block:44px 0}
+.hero-copy{min-width:0;padding-bottom:72px;display:flex;flex-direction:column;gap:22px}
+.meta{font-size:14px;font-weight:700;color:var(--ink);opacity:.8;letter-spacing:.02em}
+.hero h1{font-size:clamp(38px,6.2vw,66px);font-weight:800;color:var(--ink)}
+.hero h1 .cap{display:inline-block}
+.lead{font-size:19px;max-width:34em;color:#13263a}
+.stats{display:flex;flex-wrap:wrap;gap:12px}
+.stat{background:var(--white);border:3px solid var(--ink);border-radius:14px;padding:10px 16px;display:flex;flex-direction:column;min-width:0}
+.stat b{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13.5px;color:var(--ink-soft);font-weight:500}
+.ground{height:56px;background:var(--grass);border-top:6px solid var(--grass-dark);position:relative;z-index:0}
+
+.phone{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;border-radius:34px;border:6px solid var(--ink);background:var(--ink);overflow:hidden;
+  box-shadow:0 18px 0 -6px rgba(22,32,44,.25)}
+.phone video,.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-phone{justify-self:center;margin-bottom:-44px;z-index:1;max-width:320px}
+.sound{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--body);font-weight:700;font-size:15px;
+  background:rgba(255,255,255,.94);color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:10px;cursor:pointer}
+.sound svg{width:18px;height:18px}
+
+section{padding-block:84px}
+.eyebrow{margin-bottom:14px}
+h2{font-size:clamp(30px,4.4vw,46px);font-weight:800;max-width:20em}
+.sub{margin-top:14px;font-size:18px;color:var(--ink-soft);max-width:36em}
+
+/* DOR */
+.pain{padding-top:120px}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+.pain-item{background:var(--white);border:2px solid var(--wall-2);border-radius:16px;padding:18px 18px 18px 50px;position:relative;font-weight:500;min-width:0}
+.pain-item::before{content:"";position:absolute;left:18px;top:22px;width:18px;height:18px;border-radius:4px;background:var(--copper);transform:rotate(45deg)}
+
+/* PROVAS */
+.proof{background:var(--ink);color:var(--white)}
+.proof .sub{color:#b7c3d0}
+.proof h2{color:var(--white)}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.reel{display:flex;flex-direction:column;gap:14px;min-width:0;background:none;border:0;padding:0;color:inherit;text-align:left;cursor:pointer;font:inherit}
+.reel .phone{max-width:none;border-color:#2c3a4a;box-shadow:none;transition:transform .2s}
+.reel:hover .phone{transform:translateY(-4px)}
+.reel .badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--label);color:var(--ink);font-family:var(--display);font-weight:800;font-size:15px;
+  padding:6px 10px;border-radius:9px;border:2px solid var(--ink)}
+.reel .play{position:absolute;inset:auto 12px 12px auto;z-index:2;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;border:3px solid var(--ink)}
+.reel .play svg{width:18px;height:18px;margin-left:3px}
+.reel-info b{font-family:var(--display);font-size:22px;display:block}
+.reel-info span{color:#b7c3d0;font-size:15px}
+.proof-note{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px 28px;font-weight:700;color:var(--label)}
+
+/* CONTEÚDO */
+.chapters{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px;counter-reset:ch}
+.chapter{background:var(--white);border:3px solid var(--ink);border-radius:18px;padding:22px 22px 22px 84px;position:relative;min-width:0;counter-increment:ch}
+.chapter::before{content:counter(ch);position:absolute;left:20px;top:20px;width:46px;height:46px;border-radius:12px;background:var(--sky);border:3px solid var(--ink);
+  display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:22px}
+.chapter h3{font-size:22px;font-weight:800;margin-bottom:6px}
+.chapter p{color:var(--ink-soft)}
+.chapter.wide{grid-column:1/-1}
+
+/* OFERTA */
+.offer{background:linear-gradient(180deg,var(--wall) 0%,var(--wall-2) 100%)}
+.offer-card{background:var(--white);border:4px solid var(--ink);border-radius:26px;display:grid;grid-template-columns:1fr auto;gap:36px;padding:40px;align-items:center;box-shadow:0 10px 0 var(--ink)}
+.offer-card ul{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:10px}
+.offer-card li{padding-left:30px;position:relative}
+.offer-card li::before{content:"";position:absolute;left:4px;top:8px;width:13px;height:8px;border-left:3px solid var(--grass-dark);border-bottom:3px solid var(--grass-dark);transform:rotate(-45deg)}
+.price-box{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.price{font-family:var(--display);font-weight:800;font-size:72px;line-height:1;font-variant-numeric:tabular-nums}
+.price sup{font-size:28px;vertical-align:top;position:relative;top:10px;margin-right:4px}
+.price-sub{color:var(--ink-soft);font-size:15px}
+.secure{font-size:13.5px;color:var(--ink-soft)}
+
+.guarantee{display:flex;gap:28px;align-items:center;margin-top:44px;padding:28px;border-radius:20px;background:var(--grass);color:var(--ink);border:3px solid var(--ink)}
+.seal{flex:none;width:104px;height:104px;border-radius:50%;background:var(--label);border:4px solid var(--ink);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;line-height:1}
+.seal b{font-size:40px;display:block}
+.seal span{font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.guarantee h3{font-size:26px;margin-bottom:6px}
+.guarantee div{min-width:0}
+
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:12px;margin-top:36px;max-width:780px}
+details{background:var(--white);border:2px solid var(--wall-2);border-radius:14px;padding:4px 20px}
+summary{cursor:pointer;font-weight:700;font-size:18px;padding:14px 28px 14px 0;list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:9px;font-family:var(--display);font-size:26px;font-weight:800;color:var(--copper)}
+details[open] summary::after{content:"–"}
+details p{padding-bottom:16px;color:var(--ink-soft)}
+
+.final{text-align:center;padding-block:72px 110px}
+.final h2{margin:0 auto 26px}
+footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
+
+/* Barra fixa no celular */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);border-top:3px solid var(--ink);
+  padding:12px var(--gut-r) calc(12px + env(safe-area-inset-bottom,0px)) var(--gut-l);display:none;align-items:center;justify-content:space-between;gap:12px;
+  transform:translateY(110%);transition:transform .25s}
+.bar.show{transform:none}
+.bar .p{font-family:var(--display);font-weight:800;font-size:24px;line-height:1}
+.bar .p small{display:block;font-family:var(--body);font-weight:500;font-size:12.5px;color:var(--ink-soft)}
+.bar .btn{padding:12px 20px;font-size:17px;box-shadow:0 4px 0 var(--ink)}
+
+/* Player em tela cheia */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(10,16,24,.92);display:flex;align-items:center;justify-content:center;
+  padding:calc(16px + env(safe-area-inset-top,0px)) var(--gut-r) calc(16px + env(safe-area-inset-bottom,0px)) var(--gut-l)}
+.modal video{max-height:100%;max-width:100%;aspect-ratio:9/16;height:min(88vh,860px);border-radius:20px;background:#000}
+.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));width:48px;height:48px;border-radius:50%;
+  border:3px solid var(--ink);background:var(--label);font-size:26px;font-weight:800;line-height:1;cursor:pointer;color:var(--ink)}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:28px;padding-block:28px 0}
+  .hero-copy{padding-bottom:0}
+  .hero-phone{max-width:260px}
+  .pain-grid{grid-template-columns:1fr 1fr}
+  .reels{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .reel-info b{font-size:16px}
+  .reel-info span{font-size:13px}
+  .reel .badge{font-size:12px;padding:4px 7px;top:8px;left:8px}
+  .reel .play{width:36px;height:36px;right:8px;bottom:8px}
+  .chapters{grid-template-columns:1fr}
+  .offer-card{grid-template-columns:1fr;padding:28px 22px}
+  .bar{display:flex}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  section{padding-block:60px}
+  .pain{padding-top:96px}
+  .pain-grid{grid-template-columns:1fr}
+  .reels{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin-left:calc(-1 * var(--gut-l));margin-right:calc(-1 * var(--gut-r));padding-left:var(--gut-l);padding-right:var(--gut-r);padding-bottom:6px;scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reel{scroll-snap-align:center}
+  .reel-info b{font-size:19px}
+  .guarantee{flex-direction:column;align-items:flex-start;padding:22px}
+  .price{font-size:62px}
+  .stat b{font-size:24px}
+}
+@media (prefers-reduced-motion: reduce){.btn,.reel .phone,.bar{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="meta">E-book em PDF · em português · acesso imediato</div>
+      <h1>Vídeos 3D que explicam tudo e passam de <span class="cap">1 milhão</span> de views</h1>
+      <p class="lead">Ar-condicionado, panela de pressão, botijão de gás. Eu pego coisas do dia a dia e mostro por dentro, em 3D. Neste e-book eu entrego o meu método inteiro, da ideia ao vídeo postado, usando IA em cada etapa.</p>
+      <div class="stats">
+        <div class="stat"><b>+1 mi</b><span>views em 24 horas</span></div>
+        <div class="stat"><b>~10 mil</b><span>seguidores novos</span></div>
+        <div class="stat"><b>0</b><span>aulas de animação</span></div>
+      </div>
+      <div><a class="btn" href="#oferta">Quero o e-book</a></div>
+    </div>
+    <div class="phone hero-phone">
+      <video id="heroVid" src="v/hero.mp4" poster="v/hero.jpg" autoplay muted loop playsinline preload="auto"></video>
+      <button class="sound" type="button" data-open="v/ar.mp4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+        Ver o vídeo completo com som
+      </button>
+    </div>
+  </div>
+  <div class="ground" aria-hidden="true"></div>
+</header>
+
+<main>
+  <section class="pain">
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">O problema</span></div>
+      <h2>Parece que só animador profissional consegue fazer isso</h2>
+      <p class="sub">Você vê esses vídeos estourando no Reels e no TikTok e imagina anos de curso, um PC caríssimo e uma equipe. Não é assim que eu faço.</p>
+      <div class="pain-grid">
+        <div class="pain-item">Nunca abriu um programa de 3D</div>
+        <div class="pain-item">Começou um tutorial e largou no meio</div>
+        <div class="pain-item">Quer crescer um perfil sem mostrar o rosto</div>
+        <div class="pain-item">Acha que precisa de um computador caro</div>
+        <div class="pain-item">Não sabe que assunto rende vídeo bom</div>
+        <div class="pain-item">Posta, posta e o alcance não sai do lugar</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" id="provas">
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">Provas</span></div>
+      <h2>Feitos com o mesmo método do e-book</h2>
+      <p class="sub">Toque em qualquer vídeo pra assistir inteiro, com som.</p>
+      <div class="reels">
+        <button class="reel" type="button" data-open="v/ar.mp4" aria-label="Assistir: Como o ar-condicionado gela">
+          <div class="phone">
+            <video src="v/ar.mp4" poster="v/ar.jpg" muted loop playsinline preload="metadata"></video>
+            <span class="badge">+1 mi em 24h</span>
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="reel-info"><b>Como o ar-condicionado gela</b><span>Mais de 1 milhão de views no primeiro dia</span></div>
+        </button>
+        <button class="reel" type="button" data-open="v/panela.mp4" aria-label="Assistir: Por que a panela de pressão cozinha rápido">
+          <div class="phone">
+            <video src="v/panela.mp4" poster="v/panela.jpg" muted loop playsinline preload="metadata"></video>
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="reel-info"><b>A panela de pressão por dentro</b><span>Por que o feijão fica pronto tão rápido</span></div>
+        </button>
+        <button class="reel" type="button" data-open="v/botijao.mp4" aria-label="Assistir: O que tem dentro do botijão de gás">
+          <div class="phone">
+            <video src="v/botijao.mp4" poster="v/botijao.jpg" muted loop playsinline preload="metadata"></video>
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="reel-info"><b>O que tem dentro do botijão</b><span>Do tanque até o seu fogão</span></div>
+        </button>
+      </div>
+      <div class="proof-note"><span>+1 milhão de views em 24 horas</span><span>Quase 10 mil seguidores</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">O que tem no e-book</span></div>
+      <h2>O caminho que eu sigo, explicado sem enrolação</h2>
+      <div class="chapters">
+        <div class="chapter"><h3>Do zero ao primeiro vídeo</h3><p>As ferramentas que eu uso, o que é pago e o que é grátis, e o computador que dá conta.</p></div>
+        <div class="chapter"><h3>Como escolher o assunto</h3><p>Que tipo de objeto e pergunta faz a pessoa parar de rolar o feed.</p></div>
+        <div class="chapter"><h3>O roteiro que segura até o fim</h3><p>Como abrir com uma dúvida e só responder no final do vídeo.</p></div>
+        <div class="chapter"><h3>A IA montando a cena</h3><p>Prompts prontos pra copiar e colar: a IA monta e anima, você só ajusta.</p></div>
+        <div class="chapter wide"><h3>Narração, legenda e postagem</h3><p>Voz, legendas palavra por palavra, os rótulos amarelos e o que fazer na hora de postar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="offer" id="oferta">
+    <div class="wrap">
+      <div class="offer-card">
+        <div>
+          <div class="eyebrow"><span class="tag">Oferta</span></div>
+          <h2>Receba o e-book agora no seu e-mail</h2>
+          <ul>
+            <li>E-book completo em PDF, em português</li>
+            <li>Prompts prontos pra copiar e colar</li>
+            <li>Chega no seu e-mail logo depois do pagamento</li>
+            <li>Lê no celular ou no computador</li>
+          </ul>
+        </div>
+        <div class="price-box">
+          <div class="price"><sup>R$</sup>97</div>
+          <div class="price-sub">no Pix ou parcelado no cartão</div>
+          <a class="btn" id="buy" href="#oferta">Comprar agora</a>
+          <div class="secure">Pagamento seguro · garantia de 7 dias</div>
+        </div>
+      </div>
+
+      <div class="guarantee">
+        <div class="seal"><div><b>7</b><span>dias</span></div></div>
+        <div>
+          <h3>Garantia de 7 dias</h3>
+          <p>Leia o e-book. Se achar que não valeu, peça o reembolso em até 7 dias e receba 100% do valor de volta, sem precisar explicar o motivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">Dúvidas</span></div>
+      <h2>Perguntas frequentes</h2>
+      <div class="faq">
+        <details><summary>É um curso em vídeo?</summary><p>Não. É um e-book em PDF, pra ler no celular ou no computador, no seu tempo.</p></details>
+        <details><summary>Preciso saber animar ou programar?</summary><p>Não. Os prompts vêm prontos e a IA faz a parte difícil. Você copia, cola e ajusta pedindo pra IA.</p></details>
+        <details><summary>Preciso de um computador potente?</summary><p>Não precisa ser um PC caro. No e-book eu mostro o mínimo que funciona.</p></details>
+        <details><summary>Serve pra Reels, TikTok e Shorts?</summary><p>Sim. O vídeo é vertical, de 1 a 2 minutos, e o mesmo arquivo serve pras três plataformas.</p></details>
+        <details><summary>Como eu recebo?</summary><p>Logo depois do pagamento o e-book chega no e-mail que você informar.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Seu próximo vídeo pode ser o de 1 milhão</h2>
+      <a class="btn" href="#oferta">Quero o e-book <small>R$ 97</small></a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Explica em 3D · Todos os direitos reservados</div></footer>
+
+<div class="bar" id="bar" aria-hidden="true">
+  <div class="p">R$ 97<small>e-book em PDF</small></div>
+  <a class="btn" href="#oferta" tabindex="-1">Quero o e-book</a>
+</div>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Vídeo">
+  <video id="modalVid" controls playsinline></video>
+  <button class="close" id="close" type="button" aria-label="Fechar">×</button>
+</div>
+
+<script>
+// Troque pelo link do seu checkout (Mercado Pago, Kiwify, Hotmart...)
+const CHECKOUT_URL = "";
+const buy = document.getElementById("buy");
+if (CHECKOUT_URL) { buy.href = CHECKOUT_URL; buy.target = "_blank"; buy.rel = "noopener"; }
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hero = document.getElementById("heroVid");
+if (reduce) { hero.removeAttribute("autoplay"); hero.pause(); }
+
+// Vídeos de prova: tocam mudos quando aparecem na tela, pausam quando saem
+const previews = [...document.querySelectorAll(".reel video")];
+if ("IntersectionObserver" in window && !reduce) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .55) { e.target.play().catch(() => {}); }
+      else { e.target.pause(); }
+    });
+  }, { threshold: [0, .55, 1] });
+  previews.forEach(v => io.observe(v));
+}
+
+// Toque abre o vídeo inteiro com som
+const modal = document.getElementById("modal");
+const mv = document.getElementById("modalVid");
+let lastFocus = null;
+function openVid(src) {
+  lastFocus = document.activeElement;
+  previews.forEach(v => v.pause()); hero.pause();
+  mv.src = src; mv.muted = false; mv.currentTime = 0;
+  modal.hidden = false;
+  mv.play().catch(() => {});
+  document.getElementById("close").focus();
+}
+function closeVid() {
+  mv.pause(); mv.removeAttribute("src"); mv.load();
+  modal.hidden = true;
+  if (!reduce) hero.play().catch(() => {});
+  if (lastFocus) lastFocus.focus();
+}
+document.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click", () => openVid(b.dataset.open)));
+document.getElementById("close").addEventListener("click", closeVid);
+modal.addEventListener("click", e => { if (e.target === modal) closeVid(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeVid(); });
+
+// Barra de compra fixa depois do topo, some na seção de oferta
+const bar = document.getElementById("bar");
+const heroEl = document.querySelector(".hero");
+const offer = document.getElementById("oferta");
+let pastHero = false, atOffer = false;
+const upd = () => bar.classList.toggle("show", pastHero && !atOffer);
+if ("IntersectionObserver" in window) {
+  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; upd(); }).observe(heroEl);
+  new IntersectionObserver(([e]) => { atOffer = e.isIntersecting; upd(); }).observe(offer);
+}
+</script>
+
+</body>
+</html>
