@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Explica em 3D">
+<meta property="og:description" content="O método pra criar vídeos 3D explicativos que passam de 1 milhão de views.">
+<meta property="og:image" content="hero.jpg">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Explica em 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="E-book: o método pra criar vídeos 3D explicativos que passam de 1 milhão de views no Reels, TikTok e Shorts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700&display=swap">
+<style>
+/* Layout: a low-poly "cenário" — céu no topo, gramado como chão do hero, parede creme no resto; vídeos em telas de celular. */
+:root{
+  color-scheme: light;
+  --sky:#38b6ff;
+  --sky-deep:#0a6cff;
+  --grass:#2fc23a;
+  --grass-dark:#1b8f26;
+  --wall:#fffaf0;
+  --wall-2:#ffe7b8;
+  --ink:#16202c;
+  --ink-soft:#4a5563;
+  --label:#ffd400;
+  --copper:#ff6a1f;
+  --hot:#ff2d55;
+  --royal:#1636c9;
+  --white:#ffffff;
+  --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--wall);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+h1,h2,h3{font-family:var(--display);line-height:1.05;text-wrap:balance;margin:0;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky-deep);outline-offset:3px;border-radius:6px}
+
+/* Assinatura dos vídeos: rótulo amarelo inclinado com contorno, e legenda branca contornada */
+.tag{display:inline-block;font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:14px;color:var(--label);
+  -webkit-text-stroke:5px var(--ink);paint-order:stroke fill;transform:rotate(-3deg);transform-origin:left center}
+.cap{color:var(--white);-webkit-text-stroke:8px var(--ink);paint-order:stroke fill}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--display);font-weight:800;font-size:19px;
+  background:var(--label);color:var(--ink);text-decoration:none;padding:16px 28px;border-radius:14px;border:3px solid var(--ink);
+  box-shadow:0 5px 0 var(--ink);transition:transform .12s, box-shadow .12s;cursor:pointer}
+.btn:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--ink)}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--ink)}
+.btn small{font-family:var(--body);font-weight:500;font-size:14px;opacity:.75}
+
+/* HERO */
+.hero{background:linear-gradient(180deg,var(--sky-deep) 0%,var(--sky) 60%,#9fe0ff 100%);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-block:44px 0}
+.hero-copy{min-width:0;padding-bottom:72px;display:flex;flex-direction:column;gap:22px}
+.meta{font-size:14px;font-weight:700;color:var(--ink);opacity:.8;letter-spacing:.02em}
+.hero h1{font-size:clamp(38px,6.2vw,66px);font-weight:800;color:var(--ink)}
+.hero h1{color:var(--white);-webkit-text-stroke:7px var(--ink);paint-order:stroke fill}
+.hero h1 .cap{display:inline-block;color:var(--label);-webkit-text-stroke:9px var(--ink)}
+.lead{font-size:19px;max-width:34em;color:#13263a}
+.stats{display:flex;flex-wrap:wrap;gap:12px}
+.stat{background:var(--white);border:3px solid var(--ink);border-radius:14px;padding:10px 16px;display:flex;flex-direction:column;min-width:0}
+.stat b{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:13.5px;color:var(--ink-soft);font-weight:500}
+.ground{height:56px;background:var(--grass);border-top:6px solid var(--grass-dark);position:relative;z-index:0}
+
+.phone{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;border-radius:34px;border:6px solid var(--ink);background:var(--ink);overflow:hidden;
+  box-shadow:0 18px 0 -6px rgba(22,32,44,.25)}
+.phone video,.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-phone{justify-self:center;margin-bottom:-44px;z-index:1;max-width:320px}
+.sound{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--body);font-weight:700;font-size:15px;
+  background:rgba(255,255,255,.94);color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:10px;cursor:pointer}
+.sound svg{width:18px;height:18px}
+
+section{padding-block:84px}
+.eyebrow{margin-bottom:14px}
+h2{font-size:clamp(30px,4.4vw,46px);font-weight:800;max-width:20em}
+.sub{margin-top:14px;font-size:18px;color:var(--ink-soft);max-width:36em}
+
+/* DOR */
+.pain{padding-top:120px}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+.pain-item{background:var(--white);border:2px solid var(--wall-2);border-radius:16px;padding:18px 18px 18px 50px;position:relative;font-weight:500;min-width:0}
+.pain-item::before{content:"";position:absolute;left:18px;top:22px;width:18px;height:18px;border-radius:4px;background:var(--copper);transform:rotate(45deg)}
+
+/* PROVAS */
+.proof{background:linear-gradient(180deg,var(--royal),#0b1f7a);color:var(--white)}
+.proof .sub{color:#cfdbff}
+.proof h2{color:var(--white)}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.reel{display:flex;flex-direction:column;gap:14px;min-width:0;background:none;border:0;padding:0;color:inherit;text-align:left;cursor:pointer;font:inherit}
+.reel .phone{max-width:none;border-color:var(--ink);box-shadow:none;transition:transform .2s}
+.reel:hover .phone{transform:translateY(-4px)}
+.reel .badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--label);color:var(--ink);font-family:var(--display);font-weight:800;font-size:15px;
+  padding:6px 10px;border-radius:9px;border:2px solid var(--ink)}
+.reel .play{position:absolute;inset:auto 12px 12px auto;z-index:2;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;border:3px solid var(--ink)}
+.reel .play svg{width:18px;height:18px;margin-left:3px}
+.reel-info b{font-family:var(--display);font-size:22px;display:block}
+.reel-info span{color:#cfdbff;font-size:15px}
+.proof-note{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px 28px;font-weight:700;color:var(--label)}
+
+/* CONTEÚDO */
+.chapters{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px;counter-reset:ch}
+.chapter{background:var(--white);border:3px solid var(--ink);border-radius:18px;padding:22px 22px 22px 84px;position:relative;min-width:0;counter-increment:ch}
+.chapter::before{content:counter(ch);position:absolute;left:20px;top:20px;width:46px;height:46px;border-radius:12px;background:var(--sky);border:3px solid var(--ink);
+  display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:22px}
+.chapter h3{font-size:22px;font-weight:800;margin-bottom:6px}
+.chapter p{color:var(--ink-soft)}
+.chapter.wide{grid-column:1/-1}
+
+/* OFERTA */
+.offer{background:linear-gradient(180deg,var(--wall) 0%,var(--wall-2) 100%)}
+.offer-card{background:var(--white);border:4px solid var(--ink);border-radius:26px;display:grid;grid-template-columns:1fr auto;gap:36px;padding:40px;align-items:center;box-shadow:0 10px 0 var(--ink)}
+.offer-card ul{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:10px}
+.offer-card li{padding-left:30px;position:relative}
+.offer-card li::before{content:"";position:absolute;left:4px;top:8px;width:13px;height:8px;border-left:3px solid var(--grass-dark);border-bottom:3px solid var(--grass-dark);transform:rotate(-45deg)}
+.price-box{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.price{font-family:var(--display);font-weight:800;font-size:72px;line-height:1;font-variant-numeric:tabular-nums}
+.price sup{font-size:28px;vertical-align:top;position:relative;top:10px;margin-right:4px}
+.price-sub{color:var(--ink-soft);font-size:15px}
+.secure{font-size:13.5px;color:var(--ink-soft)}
+.launch{font-family:var(--display);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--white);background:var(--hot);border:2px solid var(--ink);border-radius:999px;padding:5px 14px}
+.inst{font-family:var(--display);font-weight:800;line-height:1;display:flex;align-items:baseline;gap:8px;justify-content:center;flex-wrap:wrap}
+.inst .x{font-size:30px}
+.inst .v{font-size:64px;font-variant-numeric:tabular-nums}
+.inst .v sup{font-size:24px;vertical-align:top;position:relative;top:8px;margin-right:3px}
+.after{font-size:14.5px;font-weight:700;color:var(--hot)}
+.timer{display:flex;gap:8px;justify-content:center}
+.timer div{background:var(--ink);color:var(--white);border-radius:10px;min-width:58px;padding:8px 6px 6px;text-align:center}
+.timer b{display:block;font-family:var(--display);font-weight:800;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.timer span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--label)}
+.timer-l{font-size:13.5px;font-weight:700}
+.promo{position:fixed;top:0;left:0;right:0;z-index:30;background:var(--hot);color:var(--white);border-bottom:3px solid var(--ink);
+  padding:calc(9px + env(safe-area-inset-top,0px)) var(--gut-r) 9px var(--gut-l);display:flex;align-items:center;justify-content:center;gap:10px 16px;flex-wrap:wrap;
+  font-weight:700;font-size:15px;text-align:center;transform:translateY(-120%);transition:transform .3s}
+.promo.show{transform:none}
+.promo .clock{font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums;background:var(--ink);border-radius:8px;padding:2px 9px}
+.promo a{background:var(--label);color:var(--ink);text-decoration:none;border:2px solid var(--ink);border-radius:9px;padding:3px 12px;font-family:var(--display);font-weight:800}
+@media (prefers-reduced-motion: reduce){.promo{transition:none}}
+@media (max-width:560px){.promo{font-size:13px}.promo .txt{flex-basis:100%}.timer div{min-width:52px}.inst .v{font-size:56px}}
+
+.guarantee{display:flex;gap:28px;align-items:center;margin-top:44px;padding:28px;border-radius:20px;background:var(--grass);color:var(--ink);border:3px solid var(--ink)}
+.seal{flex:none;width:104px;height:104px;border-radius:50%;background:var(--label);border:4px solid var(--ink);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:800;line-height:1}
+.seal b{font-size:40px;display:block}
+.seal span{font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.guarantee h3{font-size:26px;margin-bottom:6px}
+.guarantee div{min-width:0}
+
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:12px;margin-top:36px;max-width:780px}
+details{background:var(--white);border:2px solid var(--wall-2);border-radius:14px;padding:4px 20px}
+summary{cursor:pointer;font-weight:700;font-size:18px;padding:14px 28px 14px 0;list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:9px;font-family:var(--display);font-size:26px;font-weight:800;color:var(--copper)}
+details[open] summary::after{content:"–"}
+details p{padding-bottom:16px;color:var(--ink-soft)}
+
+.final{text-align:center;padding-block:72px 110px}
+.final h2{margin:0 auto 26px}
+footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
+
+/* Barra fixa no celular */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--white);border-top:3px solid var(--ink);
+  padding:12px var(--gut-r) calc(12px + env(safe-area-inset-bottom,0px)) var(--gut-l);display:none;align-items:center;justify-content:space-between;gap:12px;
+  transform:translateY(110%);transition:transform .25s}
+.bar.show{transform:none}
+.bar .p{font-family:var(--display);font-weight:800;font-size:24px;line-height:1}
+.bar .p small{display:block;font-family:var(--body);font-weight:500;font-size:12.5px;color:var(--ink-soft)}
+.bar .btn{padding:12px 20px;font-size:17px;box-shadow:0 4px 0 var(--ink)}
+
+/* Player em tela cheia */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(10,16,24,.92);display:flex;align-items:center;justify-content:center;
+  padding:calc(16px + env(safe-area-inset-top,0px)) var(--gut-r) calc(16px + env(safe-area-inset-bottom,0px)) var(--gut-l)}
+.modal video{max-height:100%;max-width:100%;aspect-ratio:9/16;height:min(88vh,860px);border-radius:20px;background:#000}
+.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));width:48px;height:48px;border-radius:50%;
+  border:3px solid var(--ink);background:var(--label);font-size:26px;font-weight:800;line-height:1;cursor:pointer;color:var(--ink)}
+
+/* MONTE SEU PRIMEIRO VÍDEO (quiz) */
+.quiz{background-color:#e8f6ff;background-image:linear-gradient(rgba(10,108,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(10,108,255,.08) 1px,transparent 1px);background-size:28px 28px}
+.quiz .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
+.quiz-intro{display:flex;flex-direction:column;gap:14px;min-width:0;position:sticky;top:90px}
+.quiz-intro .sub{margin-top:0}
+.qcard{background:var(--white);border:3px solid var(--ink);border-radius:22px;box-shadow:0 8px 0 var(--ink);padding:26px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.qtop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.qcount{font-weight:700;font-size:14px;color:var(--ink-soft)}
+.qdots{display:flex;gap:6px}
+.qdots i{width:28px;height:8px;border-radius:99px;background:var(--wall-2);border:1.5px solid var(--ink)}
+.qdots i.on{background:var(--label)}
+.qstep h3{font-size:24px;font-weight:800}
+.qstep .hint{color:var(--ink-soft);font-size:15px;margin-top:6px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;font:inherit;font-weight:700;font-size:16px;color:var(--ink);background:var(--wall);border:2.5px solid var(--ink);border-radius:14px;padding:12px 14px;cursor:pointer;transition:transform .12s,background .12s;min-width:0}
+.opt:hover{transform:translateY(-2px);background:#fff3c4}
+.opt[aria-pressed="true"]{background:var(--label)}
+.opt small{display:block;font-weight:500;font-size:13px;color:var(--ink-soft)}
+.opt svg{flex:none;width:40px;height:40px}
+.opts.one{grid-template-columns:1fr}
+.qback{align-self:flex-start;background:none;border:0;font:inherit;font-weight:700;color:var(--ink-soft);cursor:pointer;padding:4px 0;text-decoration:underline}
+.render{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;padding:30px 0}
+.render b{font-family:var(--display);font-size:22px}
+.rbar{width:100%;max-width:340px;height:16px;border:2.5px solid var(--ink);border-radius:99px;overflow:hidden;background:var(--wall)}
+.rbar span{display:block;height:100%;width:0;background:repeating-linear-gradient(135deg,var(--grass) 0 12px,var(--grass-dark) 12px 24px)}
+.result{display:flex;flex-direction:column;gap:14px}
+.result .tag{align-self:flex-start}
+.result h3{font-size:26px;font-weight:800}
+.rrow{border:2px solid var(--wall-2);border-radius:14px;padding:12px 14px;background:var(--wall)}
+.rrow span{display:block;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--copper);margin-bottom:3px}
+.rrow.hook{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.rrow.hook span{color:var(--label)}
+.rrow.hook p{font-family:var(--display);font-weight:800;font-size:21px;line-height:1.15}
+.ractions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+@media (max-width:860px){.quiz .wrap{grid-template-columns:1fr;gap:26px}.quiz-intro{position:static}}
+@media (max-width:560px){.qcard{padding:18px}.opts{grid-template-columns:1fr}.qstep h3{font-size:21px}.rrow.hook p{font-size:19px}}
+@media (prefers-reduced-motion: reduce){.opt{transition:none}}
+
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:28px;padding-block:28px 0}
+  .hero-copy{padding-bottom:0}
+  .hero-phone{max-width:260px}
+  .pain-grid{grid-template-columns:1fr 1fr}
+  .reels{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .reel-info b{font-size:16px}
+  .reel-info span{font-size:13px}
+  .reel .badge{font-size:12px;padding:4px 7px;top:8px;left:8px}
+  .reel .play{width:36px;height:36px;right:8px;bottom:8px}
+  .chapters{grid-template-columns:1fr}
+  .offer-card{grid-template-columns:1fr;padding:28px 22px}
+  .bar{display:flex}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  section{padding-block:60px}
+  .pain{padding-top:96px}
+  .pain-grid{grid-template-columns:1fr}
+  .reels{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin-left:calc(-1 * var(--gut-l));margin-right:calc(-1 * var(--gut-r));padding-left:var(--gut-l);padding-right:var(--gut-r);padding-bottom:6px;scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reel{scroll-snap-align:center}
+  .reel-info b{font-size:19px}
+  .guarantee{flex-direction:column;align-items:flex-start;padding:22px}
+  .price{font-size:62px}
+  .stat b{font-size:24px}
+}
+@media (prefers-reduced-motion: reduce){.btn,.reel .phone,.bar{transition:none}}
+</style>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="meta">E-book em PDF · em português · acesso imediato</div>
+      <h1>Vídeos 3D que explicam tudo e passam de <span class="cap">1 milhão</span> de views</h1>
+      <p class="lead">Panela de pressão, ar-condicionado, botijão de gás. Eu pego coisas do dia a dia e mostro por dentro, em 3D. Neste e-book eu entrego o meu método inteiro, da ideia ao vídeo postado, usando IA em cada etapa.</p>
+      <div class="stats">
+        <div class="stat"><b>+1 mi</b><span>views em 24 horas</span></div>
+        <div class="stat"><b>~10 mil</b><span>seguidores novos</span></div>
+      </div>
+      <div><a class="btn" href="#oferta">Quero o e-book</a></div>
+    </div>
+    <div class="phone hero-phone">
+      <video id="heroVid" src="hero.mp4" poster="hero.jpg" autoplay muted loop playsinline preload="auto"></video>
+      <button class="sound" type="button" data-open="panela.mp4">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+        Ver o vídeo completo com som
+      </button>
+    </div>
+  </div>
+  <div class="ground" aria-hidden="true"></div>
+</header>
+
+<main>
+  <section class="pain">
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">O problema</span></div>
+      <h2>Parece que só animador profissional consegue fazer isso</h2>
+      <p class="sub">Você vê esses vídeos estourando no Reels e no TikTok e imagina anos de curso, um PC caríssimo e uma equipe. Não é assim que eu faço.</p>
+      <div class="pain-grid">
+        <div class="pain-item">Nunca abriu um programa de 3D</div>
+        <div class="pain-item">Começou um tutorial e largou no meio</div>
+        <div class="pain-item">Quer crescer um perfil sem mostrar o rosto</div>
+        <div class="pain-item">Acha que precisa de um computador caro</div>
+        <div class="pain-item">Não sabe que assunto rende vídeo bom</div>
+        <div class="pain-item">Posta, posta e o alcance não sai do lugar</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" id="provas">
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">Provas</span></div>
+      <h2>Feitos com o mesmo método do e-book</h2>
+      <p class="sub">Toque em qualquer vídeo pra assistir inteiro, com som.</p>
+      <div class="reels">
+        <button class="reel" type="button" data-open="panela.mp4" aria-label="Assistir: A panela de pressão por dentro">
+          <div class="phone">
+            <video src="panela.mp4" poster="panela.jpg" muted loop playsinline preload="metadata"></video>
+            <span class="badge">+1 mi em 24h</span>
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="reel-info"><b>A panela de pressão por dentro</b><span>Mais de 1 milhão de views no primeiro dia</span></div>
+        </button>
+        <button class="reel" type="button" data-open="ar.mp4" aria-label="Assistir: Como o ar-condicionado gela">
+          <div class="phone">
+            <video src="ar.mp4" poster="ar.jpg" muted loop playsinline preload="metadata"></video>
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="reel-info"><b>Como o ar-condicionado gela</b><span>O caminho do gás, do quarto até a rua</span></div>
+        </button>
+        <button class="reel" type="button" data-open="botijao.mp4" aria-label="Assistir: O que tem dentro do botijão de gás">
+          <div class="phone">
+            <video src="botijao.mp4" poster="botijao.jpg" muted loop playsinline preload="metadata"></video>
+            <span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span>
+          </div>
+          <div class="reel-info"><b>O que tem dentro do botijão</b><span>Do tanque até o seu fogão</span></div>
+        </button>
+      </div>
+      <div class="proof-note"><span>+1 milhão de views em 24 horas</span><span>Quase 10 mil seguidores</span></div>
+    </div>
+  </section>
+
+  <section class="quiz" id="monte">
+    <div class="wrap">
+      <div class="quiz-intro">
+        <div class="eyebrow"><span class="tag">Sua vez</span></div>
+        <h2>Monte o seu primeiro vídeo em 3 cliques</h2>
+        <p class="sub">Responda 3 perguntas rápidas e receba um plano feito pra você: o tema, o gancho pronto pra usar e o ritmo certo pra começar.</p>
+        <p class="sub" style="font-weight:700;color:var(--ink)">Leva menos de 30 segundos.</p>
+      </div>
+
+      <div class="qcard" id="qcard" aria-live="polite">
+        <div class="qtop" id="qtop">
+          <span class="qcount" id="qcount">Pergunta 1 de 3</span>
+          <span class="qdots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>
+        </div>
+
+        <div class="qstep" data-step="0">
+          <h3>Qual objeto você quer mostrar por dentro?</h3>
+          <p class="hint">Escolha o que mais te dá curiosidade.</p>
+          <div class="opts">
+            <button class="opt" type="button" data-q="obj" data-v="geladeira" aria-pressed="false">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="9" y="3" width="22" height="34" rx="3" fill="#e8f6ff" stroke="#16202c" stroke-width="2.5"/><path d="M9 15h22" stroke="#16202c" stroke-width="2.5"/><path d="M26 8v4M26 19v6" stroke="#16202c" stroke-width="2.5" stroke-linecap="round"/></svg>
+              <span>Geladeira<small>como ela gela</small></span></button>
+            <button class="opt" type="button" data-q="obj" data-v="caixa" aria-pressed="false">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 12h26l-3 24H10z" fill="#38b6ff" stroke="#16202c" stroke-width="2.5" stroke-linejoin="round"/><path d="M5 12h30" stroke="#16202c" stroke-width="2.5" stroke-linecap="round"/><circle cx="25" cy="20" r="4" fill="#ffd400" stroke="#16202c" stroke-width="2"/></svg>
+              <span>Caixa d'água<small>o segredo da boia</small></span></button>
+            <button class="opt" type="button" data-q="obj" data-v="disjuntor" aria-pressed="false">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="4" width="24" height="32" rx="3" fill="#fffaf0" stroke="#16202c" stroke-width="2.5"/><rect x="15" y="12" width="10" height="16" rx="2" fill="#ff2d55" stroke="#16202c" stroke-width="2.5"/><path d="M20 15v5" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+              <span>Disjuntor<small>por que ele desarma</small></span></button>
+            <button class="opt" type="button" data-q="obj" data-v="airbag" aria-pressed="false">
+              <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#fffaf0" stroke="#16202c" stroke-width="2.5"/><circle cx="20" cy="20" r="9" fill="#ffd400" stroke="#16202c" stroke-width="2.5"/><path d="M5 20h6M29 20h6M20 29v6" stroke="#16202c" stroke-width="2.5"/></svg>
+              <span>Airbag<small>como abre tão rápido</small></span></button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="1" hidden>
+          <h3>O que mais te trava hoje?</h3>
+          <p class="hint">Seja sincero, ninguém está vendo.</p>
+          <div class="opts one">
+            <button class="opt" type="button" data-q="trava" data-v="animar" aria-pressed="false"><span>Não sei animar nada</span></button>
+            <button class="opt" type="button" data-q="trava" data-v="programar" aria-pressed="false"><span>Tenho medo da parte técnica</span></button>
+            <button class="opt" type="button" data-q="trava" data-v="tempo" aria-pressed="false"><span>Acho que vai levar tempo demais</span></button>
+            <button class="opt" type="button" data-q="trava" data-v="aparecer" aria-pressed="false"><span>Não quero aparecer nem gravar minha voz</span></button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="2" hidden>
+          <h3>Quanto tempo você tem por semana?</h3>
+          <p class="hint">Pode ser à noite ou no fim de semana.</p>
+          <div class="opts one">
+            <button class="opt" type="button" data-q="tempo" data-v="2" aria-pressed="false"><span>Umas 2 horas<small>bem corrido</small></span></button>
+            <button class="opt" type="button" data-q="tempo" data-v="5" aria-pressed="false"><span>Umas 5 horas<small>algumas noites</small></span></button>
+            <button class="opt" type="button" data-q="tempo" data-v="10" aria-pressed="false"><span>10 horas ou mais<small>quero levar a sério</small></span></button>
+          </div>
+        </div>
+
+        <div class="render" id="render" hidden>
+          <b>Montando o seu vídeo...</b>
+          <div class="rbar"><span id="rfill"></span></div>
+          <span class="qcount" id="rpct">0%</span>
+        </div>
+
+        <div class="result" id="result" hidden>
+          <span class="tag">Seu plano está pronto</span>
+          <h3 id="rTitle">Seu primeiro vídeo</h3>
+          <div class="rrow hook"><span>Gancho pronto pra abrir o vídeo</span><p id="rHook"></p></div>
+          <div class="rrow"><span>Sobre o que te trava</span><p id="rTrava"></p></div>
+          <div class="rrow"><span>Seu ritmo</span><p id="rTempo"></p></div>
+          <p style="font-weight:700">O passo a passo completo pra transformar isso em vídeo está no e-book.</p>
+          <div class="ractions">
+            <a class="btn" href="#oferta">Quero o método completo</a>
+            <button class="qback" type="button" id="qredo">Refazer</button>
+          </div>
+        </div>
+
+        <button class="qback" type="button" id="qprev" hidden>← Voltar</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">O que tem no e-book</span></div>
+      <h2>O caminho que eu sigo, explicado sem enrolação</h2>
+      <div class="chapters">
+        <div class="chapter"><h3>Do zero ao primeiro vídeo</h3><p>As ferramentas que eu uso, o que é pago e o que é grátis, e o computador que dá conta.</p></div>
+        <div class="chapter"><h3>Como escolher o assunto</h3><p>Que tipo de objeto e pergunta faz a pessoa parar de rolar o feed.</p></div>
+        <div class="chapter"><h3>O roteiro que segura até o fim</h3><p>Como abrir com uma dúvida e só responder no final do vídeo.</p></div>
+        <div class="chapter"><h3>A IA montando a cena</h3><p>Prompts prontos pra copiar e colar: a IA monta e anima, você só ajusta.</p></div>
+        <div class="chapter wide"><h3>Narração, legenda e postagem</h3><p>Voz, legendas palavra por palavra, os rótulos amarelos e o que fazer na hora de postar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="offer" id="oferta">
+    <div class="wrap">
+      <div class="offer-card">
+        <div>
+          <div class="eyebrow"><span class="tag">Oferta</span></div>
+          <h2>Receba o e-book agora no seu e-mail</h2>
+          <ul>
+            <li>E-book completo em PDF, em português</li>
+            <li>Prompts prontos pra copiar e colar</li>
+            <li>Chega no seu e-mail logo depois do pagamento</li>
+            <li>Lê no celular ou no computador</li>
+          </ul>
+        </div>
+        <div class="price-box">
+          <span class="launch" id="launchTag">Preço de lançamento</span>
+          <div class="inst"><span class="x" id="instX">12x de</span><span class="v" id="instV"><sup>R$</sup><span id="parc">10,03</span></span></div>
+          <div class="price-sub" id="cashLine">ou R$ 97 à vista no Pix</div>
+          <div class="after" id="afterLine">Depois de domingo (25/10) o preço sobe para R$ 297</div>
+          <div class="timer-l" id="timerL">Esse preço acaba em:</div>
+          <div class="timer" id="timer" aria-live="off">
+            <div><b data-t="d">0</b><span>dias</span></div>
+            <div><b data-t="h">00</b><span>horas</span></div>
+            <div><b data-t="m">00</b><span>min</span></div>
+            <div><b data-t="s">00</b><span>seg</span></div>
+          </div>
+          <a class="btn" id="buy" href="https://pay.kiwify.com.br/AR8LCHS">Comprar agora</a>
+          <div class="secure">Pagamento seguro · garantia de 7 dias</div>
+        </div>
+      </div>
+
+      <div class="guarantee">
+        <div class="seal"><div><b>7</b><span>dias</span></div></div>
+        <div>
+          <h3>Garantia de 7 dias</h3>
+          <p>Leia o e-book. Se achar que não valeu, peça o reembolso em até 7 dias e receba 100% do valor de volta, sem precisar explicar o motivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow"><span class="tag">Dúvidas</span></div>
+      <h2>Perguntas frequentes</h2>
+      <div class="faq">
+        <details><summary>É um curso em vídeo?</summary><p>Não. É um e-book em PDF, pra ler no celular ou no computador, no seu tempo.</p></details>
+        <details><summary>Preciso saber animar ou programar?</summary><p>Não. Os prompts vêm prontos e a IA faz a parte difícil. Você copia, cola e ajusta pedindo pra IA.</p></details>
+        <details><summary>Preciso de um computador potente?</summary><p>Não precisa ser um PC caro. No e-book eu mostro o mínimo que funciona.</p></details>
+        <details><summary>Serve pra Reels, TikTok e Shorts?</summary><p>Sim. O vídeo é vertical, de 1 a 2 minutos, e o mesmo arquivo serve pras três plataformas.</p></details>
+        <details><summary>Como eu recebo?</summary><p>Logo depois do pagamento o e-book chega no e-mail que você informar.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Seu próximo vídeo pode ser o de 1 milhão</h2>
+      <a class="btn" href="#oferta">Quero o e-book</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Explica em 3D · Todos os direitos reservados</div></footer>
+
+<div class="promo" id="promo" role="status">
+  <span class="txt">Preço de lançamento: R$ 97 só até domingo</span>
+  <span class="clock" id="promoClock">0d 00:00:00</span>
+  <a href="#oferta">Garantir</a>
+</div>
+
+<div class="bar" id="bar" aria-hidden="true">
+  <div class="p"><span id="barP">12x R$ 10,03</span><small id="barS">ou R$ 97 no Pix</small></div>
+  <a class="btn" href="#oferta" tabindex="-1">Quero o e-book</a>
+</div>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Vídeo">
+  <video id="modalVid" controls playsinline></video>
+  <button class="close" id="close" type="button" aria-label="Fechar">×</button>
+</div>
+
+<script>
+
+// ===== PROMOÇÃO DE LANÇAMENTO =====
+// Data real em que o preço sobe. Depois dela a página mostra R$ 297 sozinha.
+// Lembre de mudar o preço na Kiwify no mesmo dia.
+const FIM_PROMO = new Date("2026-10-25T23:59:59-03:00");
+const PARCELA_6X = "10,03";          // valor da parcela em 12x que aparece no checkout da Kiwify
+const PRECO_DEPOIS = "297";
+document.getElementById("parc").textContent = PARCELA_6X;
+document.getElementById("barP").textContent = "12x R$ " + PARCELA_6X;
+const promo = document.getElementById("promo");
+const promoClock = document.getElementById("promoClock");
+const tEls = {}; document.querySelectorAll("[data-t]").forEach(el => tEls[el.dataset.t] = el);
+const pad = n => String(n).padStart(2, "0");
+let promoAtiva = true;
+function encerrar() {
+  promoAtiva = false;
+  promo.hidden = true;
+  ["timer", "timerL", "afterLine"].forEach(id => document.getElementById(id).hidden = true);
+  document.getElementById("launchTag").textContent = "Preço atual";
+  document.getElementById("instX").textContent = "R$";
+  document.getElementById("instV").innerHTML = PRECO_DEPOIS;
+  document.getElementById("cashLine").textContent = "no Pix ou em até 12x no cartão";
+  document.getElementById("barP").textContent = "R$ " + PRECO_DEPOIS;
+  document.getElementById("barS").textContent = "em até 12x no cartão";
+}
+function tick() {
+  const ms = FIM_PROMO - Date.now();
+  if (ms <= 0) { encerrar(); return; }
+  const t = Math.floor(ms / 1000), d = Math.floor(t / 86400), h = Math.floor(t % 86400 / 3600), m = Math.floor(t % 3600 / 60), sec = t % 60;
+  tEls.d.textContent = d; tEls.h.textContent = pad(h); tEls.m.textContent = pad(m); tEls.s.textContent = pad(sec);
+  promoClock.textContent = (d ? d + "d " : "") + pad(h) + ":" + pad(m) + ":" + pad(sec);
+  setTimeout(tick, 1000 - (Date.now() % 1000));
+}
+tick();
+
+// ===== MONTE SEU PRIMEIRO VÍDEO =====
+(function () {
+  const OBJ = {
+    geladeira: { t: "Como a geladeira gela por dentro", h: "A geladeira não cria frio. Ela tira o calor de dentro." },
+    caixa: { t: "O segredo da boia da caixa d'água", h: "Uma bolinha de plástico impede a sua casa de alagar." },
+    disjuntor: { t: "Por que o disjuntor desarma", h: "Esse estalo no quadro de luz pode ter salvado a sua casa." },
+    airbag: { t: "Como o airbag abre tão rápido", h: "O airbag abre mais rápido que um piscar de olhos." }
+  };
+  const TRAVA = {
+    animar: "Você não vai animar nada na mão. Você descreve a cena em palavras e a IA cria o movimento. Está tudo na Etapa 4 do e-book.",
+    programar: "Você não escreve código. O GPT 6 Astra escreve, você copia e cola. Os prompts já vêm prontos no e-book.",
+    tempo: "No método, a voz vem antes da animação. Esse detalhe sozinho corta a maior parte do tempo perdido com ajustes.",
+    aparecer: "O formato é 100% sem rosto. O protagonista é o objeto, e a narração sai de uma voz pronta no CapCut."
+  };
+  const TEMPO = {
+    "2": "Uma meta realista: 1 vídeo a cada duas semanas no começo, acelerando conforme pegar a prática.",
+    "5": "Uma meta realista: 1 vídeo por semana, o mesmo ritmo do plano de 30 dias do e-book.",
+    "10": "Uma meta realista: 2 vídeos por semana, testando ganchos diferentes pra descobrir o que mais prende."
+  };
+  const card = document.getElementById("qcard");
+  const steps = [...card.querySelectorAll(".qstep")];
+  const dots = [...card.querySelectorAll(".qdots i")];
+  const count = document.getElementById("qcount"), top = document.getElementById("qtop");
+  const prev = document.getElementById("qprev"), render = document.getElementById("render"), result = document.getElementById("result");
+  const ans = {}; let cur = 0;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function show(i) {
+    cur = i;
+    steps.forEach((s, k) => s.hidden = k !== i);
+    dots.forEach((d, k) => d.classList.toggle("on", k <= i));
+    count.textContent = "Pergunta " + (i + 1) + " de 3";
+    top.hidden = false; render.hidden = true; result.hidden = true;
+    prev.hidden = i === 0;
+  }
+  function finish() {
+    steps.forEach(s => s.hidden = true); prev.hidden = true; top.hidden = true;
+    const o = OBJ[ans.obj];
+    document.getElementById("rTitle").textContent = "Seu primeiro vídeo: " + o.t;
+    document.getElementById("rHook").textContent = "“" + o.h + "”";
+    document.getElementById("rTrava").textContent = TRAVA[ans.trava];
+    document.getElementById("rTempo").textContent = TEMPO[ans.tempo];
+    if (reduce) { result.hidden = false; return; }
+    render.hidden = false;
+    const fill = document.getElementById("rfill"), pct = document.getElementById("rpct");
+    const t0 = performance.now(), dur = 1400;
+    (function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      fill.style.width = (p * 100) + "%"; pct.textContent = Math.round(p * 100) + "%";
+      if (p < 1) requestAnimationFrame(step);
+      else { render.hidden = true; result.hidden = false; card.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+    })(t0);
+  }
+  card.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
+    const q = b.dataset.q;
+    card.querySelectorAll('.opt[data-q="' + q + '"]').forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    ans[q] = b.dataset.v;
+    setTimeout(() => (cur < 2 ? show(cur + 1) : finish()), reduce ? 0 : 220);
+  }));
+  prev.addEventListener("click", () => show(Math.max(0, cur - 1)));
+  document.getElementById("qredo").addEventListener("click", () => {
+    card.querySelectorAll(".opt").forEach(x => x.setAttribute("aria-pressed", "false"));
+    show(0);
+  });
+})();
+
+// Troque pelo link do seu checkout (Mercado Pago, Kiwify, Hotmart...)
+const CHECKOUT_URL = "https://pay.kiwify.com.br/AR8LCHS";
+const buy = document.getElementById("buy");
+if (CHECKOUT_URL) { buy.href = CHECKOUT_URL; }
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hero = document.getElementById("heroVid");
+if (reduce) { hero.removeAttribute("autoplay"); hero.pause(); }
+
+// Vídeos de prova: tocam mudos quando aparecem na tela, pausam quando saem
+const previews = [...document.querySelectorAll(".reel video")];
+if ("IntersectionObserver" in window && !reduce) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .55) { e.target.play().catch(() => {}); }
+      else { e.target.pause(); }
+    });
+  }, { threshold: [0, .55, 1] });
+  previews.forEach(v => io.observe(v));
+}
+
+// Toque abre o vídeo inteiro com som
+const modal = document.getElementById("modal");
+const mv = document.getElementById("modalVid");
+let lastFocus = null;
+function openVid(src) {
+  lastFocus = document.activeElement;
+  previews.forEach(v => v.pause()); hero.pause();
+  mv.src = src; mv.muted = false; mv.currentTime = 0;
+  modal.hidden = false;
+  mv.play().catch(() => {});
+  document.getElementById("close").focus();
+}
+function closeVid() {
+  mv.pause(); mv.removeAttribute("src"); mv.load();
+  modal.hidden = true;
+  if (!reduce) hero.play().catch(() => {});
+  if (lastFocus) lastFocus.focus();
+}
+document.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click", () => openVid(b.dataset.open)));
+document.getElementById("close").addEventListener("click", closeVid);
+modal.addEventListener("click", e => { if (e.target === modal) closeVid(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeVid(); });
+
+// Barra de compra fixa depois do topo, some na seção de oferta
+const bar = document.getElementById("bar");
+const heroEl = document.querySelector(".hero");
+const offer = document.getElementById("oferta");
+let pastHero = false, atOffer = false;
+const upd = () => { bar.classList.toggle("show", pastHero && !atOffer); promo.classList.toggle("show", promoAtiva && pastHero && !atOffer); };
+if ("IntersectionObserver" in window) {
+  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; upd(); }).observe(heroEl);
+  new IntersectionObserver(([e]) => { atOffer = e.isIntersecting; upd(); }).observe(offer);
+}
+</script>
+
+</body>
+</html>
