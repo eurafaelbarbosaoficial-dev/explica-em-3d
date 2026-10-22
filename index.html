@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta property="og:title" content="Explica em 3D">
-<meta property="og:description" content="O método pra criar vídeos 3D explicativos que passam de 1 milhão de views.">
+<meta property="og:title" content="Kit 3D Pronto">
+<meta property="og:description" content="Cenas 3D prontas e prompts pro ChatGPT pra criar vídeos explicativos que prendem até o fim.">
 <meta property="og:image" content="hero.jpg">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Explica em 3D</title>
+<title>Kit 3D Pronto</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="E-book: o método pra criar vídeos 3D explicativos que passam de 1 milhão de views no Reels, TikTok e Shorts.">
+<meta name="description" content="Kit 3D Pronto: cenas 3D prontas e prompts pro ChatGPT pra criar vídeos explicativos para Reels, TikTok e Shorts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700&display=swap">
@@ -66,7 +66,7 @@ a{color:inherit}
 .hero h1{color:var(--white);-webkit-text-stroke:7px var(--ink);paint-order:stroke fill}
 .hero h1 .cap{display:inline-block;color:var(--label);-webkit-text-stroke:9px var(--ink)}
 .lead{font-size:19px;max-width:34em;color:#13263a}
-.stats{display:flex;flex-wrap:wrap;gap:12px}
+.stats{display:grid;grid-template-columns:repeat(2,max-content);gap:12px}
 .stat{background:var(--white);border:3px solid var(--ink);border-radius:14px;padding:10px 16px;display:flex;flex-direction:column;min-width:0}
 .stat b{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
 .stat span{font-size:13.5px;color:var(--ink-soft);font-weight:500}
@@ -133,6 +133,7 @@ h2{font-size:clamp(30px,4.4vw,46px);font-weight:800;max-width:20em}
 .inst .v{font-size:64px;font-variant-numeric:tabular-nums}
 .inst .v sup{font-size:24px;vertical-align:top;position:relative;top:8px;margin-right:3px}
 .after{font-size:14.5px;font-weight:700;color:var(--hot)}
+.old{font-size:16px;font-weight:700;color:var(--ink-soft);text-decoration:line-through;text-decoration-thickness:2px}
 .timer{display:flex;gap:8px;justify-content:center}
 .timer div{background:var(--ink);color:var(--white);border-radius:10px;min-width:58px;padding:8px 6px 6px;text-align:center}
 .timer b{display:block;font-family:var(--display);font-weight:800;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
@@ -247,7 +248,10 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
   .reel-info b{font-size:19px}
   .guarantee{flex-direction:column;align-items:flex-start;padding:22px}
   .price{font-size:62px}
-  .stat b{font-size:24px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .stat{padding:8px 10px}
+  .stat b{font-size:19px}
+  .stat span{font-size:12px}
 }
 @media (prefers-reduced-motion: reduce){.btn,.reel .phone,.bar{transition:none}}
 </style>
@@ -259,20 +263,20 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
 <header class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <div class="meta">E-book em PDF · em português · acesso imediato</div>
-      <h1>Vídeos 3D que explicam tudo e passam de <span class="cap">1 milhão</span> de views</h1>
-      <p class="lead">Panela de pressão, ar-condicionado, botijão de gás. Eu pego coisas do dia a dia e mostro por dentro, em 3D. Neste e-book eu entrego o meu método inteiro, da ideia ao vídeo postado, usando IA em cada etapa.</p>
+      <div class="meta">Kit digital · acesso imediato · feito pro ChatGPT</div>
+      <h1>Vídeos 3D que prendem até o último segundo, <span class="cap">sem saber animar</span></h1>
+      <p class="lead">Você recebe cenas 3D prontas e os prompts exatos pro ChatGPT. Abre a cena, troca o tema, grava e posta. É o mesmo tipo de vídeo que me deu mais de 1 milhão de views em 24 horas.</p>
       <div class="stats">
-        <div class="stat"><b>+1 mi</b><span>views em 24 horas</span></div>
-        <div class="stat"><b>~10 mil</b><span>seguidores novos</span></div>
+        <div class="stat"><b>3 cenas</b><span>prontas pra gravar</span></div>
+        <div class="stat"><b>Zero</b><span>instalação</span></div>
       </div>
-      <div><a class="btn" href="#oferta">Quero o e-book</a></div>
+      <div><a class="btn" href="#oferta">Quero o Kit 3D Pronto</a></div>
     </div>
     <div class="phone hero-phone">
       <video id="heroVid" src="hero.mp4" poster="hero.jpg" autoplay muted loop playsinline preload="auto"></video>
       <button class="sound" type="button" data-open="panela.mp4">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
-        Ver o vídeo completo com som
+        Ver o vídeo de 1 milhão com som
       </button>
     </div>
   </div>
@@ -283,14 +287,14 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
   <section class="pain">
     <div class="wrap">
       <div class="eyebrow"><span class="tag">O problema</span></div>
-      <h2>Parece que só animador profissional consegue fazer isso</h2>
-      <p class="sub">Você vê esses vídeos estourando no Reels e no TikTok e imagina anos de curso, um PC caríssimo e uma equipe. Não é assim que eu faço.</p>
+      <h2>O difícil não é ter a ideia. É sair do zero.</h2>
+      <p class="sub">Quem tenta sozinho trava na primeira cena: câmera torta, objeto flutuando, código que não roda, vídeo que ninguém assiste até o fim. O kit pula essa parte e te entrega a cena já funcionando.</p>
       <div class="pain-grid">
         <div class="pain-item">Nunca abriu um programa de 3D</div>
-        <div class="pain-item">Começou um tutorial e largou no meio</div>
+        <div class="pain-item">Pediu código pra IA e veio uma tela preta</div>
         <div class="pain-item">Quer crescer um perfil sem mostrar o rosto</div>
         <div class="pain-item">Acha que precisa de um computador caro</div>
-        <div class="pain-item">Não sabe que assunto rende vídeo bom</div>
+        <div class="pain-item">Não sabe como abrir o vídeo pra prender</div>
         <div class="pain-item">Posta, posta e o alcance não sai do lugar</div>
       </div>
     </div>
@@ -298,9 +302,9 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
 
   <section class="proof" id="provas">
     <div class="wrap">
-      <div class="eyebrow"><span class="tag">Provas</span></div>
-      <h2>Feitos com o mesmo método do e-book</h2>
-      <p class="sub">Toque em qualquer vídeo pra assistir inteiro, com som.</p>
+      <div class="eyebrow"><span class="tag">Prova, não promessa</span></div>
+      <h2>Feitos do mesmo jeito que o kit ensina</h2>
+      <p class="sub">Esses são vídeos meus. Toque em qualquer um pra assistir inteiro, com som.</p>
       <div class="reels">
         <button class="reel" type="button" data-open="panela.mp4" aria-label="Assistir: A panela de pressão por dentro">
           <div class="phone">
@@ -325,7 +329,7 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
           <div class="reel-info"><b>O que tem dentro do botijão</b><span>Do tanque até o seu fogão</span></div>
         </button>
       </div>
-      <div class="proof-note"><span>+1 milhão de views em 24 horas</span><span>Quase 10 mil seguidores</span></div>
+      <div class="proof-note"><span>+1 milhão de views em 24 horas</span><span>Quase 10 mil seguidores</span><span>Nenhum rosto, nenhuma aula de animação</span></div>
     </div>
   </section>
 
@@ -396,9 +400,9 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
           <div class="rrow hook"><span>Gancho pronto pra abrir o vídeo</span><p id="rHook"></p></div>
           <div class="rrow"><span>Sobre o que te trava</span><p id="rTrava"></p></div>
           <div class="rrow"><span>Seu ritmo</span><p id="rTempo"></p></div>
-          <p style="font-weight:700">O passo a passo completo pra transformar isso em vídeo está no e-book.</p>
+          <div class="rrow"><span>No kit</span><p id="rKit"></p></div>
           <div class="ractions">
-            <a class="btn" href="#oferta">Quero o método completo</a>
+            <a class="btn" href="#oferta">Quero o Kit 3D Pronto</a>
             <button class="qback" type="button" id="qredo">Refazer</button>
           </div>
         </div>
@@ -408,16 +412,17 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
     </div>
   </section>
 
+
   <section>
     <div class="wrap">
-      <div class="eyebrow"><span class="tag">O que tem no e-book</span></div>
-      <h2>O caminho que eu sigo, explicado sem enrolação</h2>
+      <div class="eyebrow"><span class="tag">O que vem no kit</span></div>
+      <h2>Tudo pra você sair do zero e gravar o primeiro vídeo</h2>
       <div class="chapters">
-        <div class="chapter"><h3>Do zero ao primeiro vídeo</h3><p>As ferramentas que eu uso, o que é pago e o que é grátis, e o computador que dá conta.</p></div>
-        <div class="chapter"><h3>Como escolher o assunto</h3><p>Que tipo de objeto e pergunta faz a pessoa parar de rolar o feed.</p></div>
-        <div class="chapter"><h3>O roteiro que segura até o fim</h3><p>Como abrir com uma dúvida e só responder no final do vídeo.</p></div>
-        <div class="chapter"><h3>A IA montando a cena</h3><p>Prompts prontos pra copiar e colar: a IA monta e anima, você só ajusta.</p></div>
-        <div class="chapter wide"><h3>Narração, legenda e postagem</h3><p>Voz, legendas palavra por palavra, os rótulos amarelos e o que fazer na hora de postar.</p></div>
+        <div class="chapter"><h3>3 cenas 3D prontas</h3><p>Geladeira, caixa d'água e disjuntor. Você abre no Chrome, a cena roda sozinha e um botão grava o vídeo em 1080x1920.</p></div>
+        <div class="chapter"><h3>Cenário base</h3><p>Cozinha e quintal no estilo low poly, com luz e câmera já acertadas, pra você montar qualquer vídeo novo em cima.</p></div>
+        <div class="chapter"><h3>Biblioteca de objetos</h3><p>Mais de 20 objetos prontos, como canos, motor, fogão, panela, tomada e bolinhas de gás, pra encaixar nas suas cenas.</p></div>
+        <div class="chapter"><h3>Prompts pro ChatGPT</h3><p>Um prompt pra cada etapa: roteiro com gancho, plano de cenas, movimento de câmera, código da cena e correções.</p></div>
+        <div class="chapter wide"><h3>Guia rápido de gravação e edição</h3><p>Como abrir a cena, gravar o vídeo e montar no CapCut com voz, legenda palavra por palavra e os rótulos amarelos.</p></div>
       </div>
     </div>
   </section>
@@ -427,27 +432,28 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
       <div class="offer-card">
         <div>
           <div class="eyebrow"><span class="tag">Oferta</span></div>
-          <h2>Receba o e-book agora no seu e-mail</h2>
+          <h2>Leve o Kit 3D Pronto hoje</h2>
           <ul>
-            <li>E-book completo em PDF, em português</li>
-            <li>Prompts prontos pra copiar e colar</li>
-            <li>Chega no seu e-mail logo depois do pagamento</li>
-            <li>Lê no celular ou no computador</li>
+            <li>3 cenas 3D prontas pra abrir e gravar</li>
+            <li>Cenário base de cozinha e quintal</li>
+            <li>Biblioteca com mais de 20 objetos low poly</li>
+            <li>Prompts pro ChatGPT pra cada etapa do vídeo</li>
+            <li>Guia rápido de gravação e edição no CapCut</li>
+            <li>Acesso imediato no seu e-mail</li>
           </ul>
         </div>
         <div class="price-box">
-          <span class="launch" id="launchTag">Preço de lançamento</span>
-          <div class="inst"><span class="x" id="instX">12x de</span><span class="v" id="instV"><sup>R$</sup><span id="parc">10,03</span></span></div>
-          <div class="price-sub" id="cashLine">ou R$ 97 à vista no Pix</div>
-          <div class="after" id="afterLine">Depois de domingo (25/10) o preço sobe para R$ 297</div>
-          <div class="timer-l" id="timerL">Esse preço acaba em:</div>
+          <span class="launch" id="launchTag">Preço de boas-vindas</span>
+          <div class="old" id="oldLine">Preço normal: R$ <span id="precoNormal1">37</span></div>
+          <div class="inst"><span class="x" id="instX">4x de</span><span class="v" id="instV"><sup>R$</sup><span id="parc">5,42</span></span></div>
+          <div class="price-sub" id="cashLine">ou R$ <span id="precoAtual">19,90</span> à vista no Pix</div>
+          <div class="timer-l" id="timerL">Seu preço de boas-vindas acaba em:</div>
           <div class="timer" id="timer" aria-live="off">
-            <div><b data-t="d">0</b><span>dias</span></div>
-            <div><b data-t="h">00</b><span>horas</span></div>
-            <div><b data-t="m">00</b><span>min</span></div>
+            <div><b data-t="m">15</b><span>min</span></div>
             <div><b data-t="s">00</b><span>seg</span></div>
           </div>
-          <a class="btn" id="buy" href="https://pay.kiwify.com.br/AR8LCHS">Comprar agora</a>
+          <div class="after" id="afterLine">Quando o tempo zerar, o kit volta pra R$ <span id="precoNormal2">37</span></div>
+          <a class="btn" id="buy" href="#oferta">Comprar agora</a>
           <div class="secure">Pagamento seguro · garantia de 7 dias</div>
         </div>
       </div>
@@ -456,7 +462,7 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
         <div class="seal"><div><b>7</b><span>dias</span></div></div>
         <div>
           <h3>Garantia de 7 dias</h3>
-          <p>Leia o e-book. Se achar que não valeu, peça o reembolso em até 7 dias e receba 100% do valor de volta, sem precisar explicar o motivo.</p>
+          <p>Abra as cenas, teste os prompts. Se achar que não valeu, peça o reembolso em até 7 dias e receba 100% do valor de volta.</p>
         </div>
       </div>
     </div>
@@ -467,34 +473,35 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
       <div class="eyebrow"><span class="tag">Dúvidas</span></div>
       <h2>Perguntas frequentes</h2>
       <div class="faq">
-        <details><summary>É um curso em vídeo?</summary><p>Não. É um e-book em PDF, pra ler no celular ou no computador, no seu tempo.</p></details>
-        <details><summary>Preciso saber animar ou programar?</summary><p>Não. Os prompts vêm prontos e a IA faz a parte difícil. Você copia, cola e ajusta pedindo pra IA.</p></details>
-        <details><summary>Preciso de um computador potente?</summary><p>Não precisa ser um PC caro. No e-book eu mostro o mínimo que funciona.</p></details>
-        <details><summary>Serve pra Reels, TikTok e Shorts?</summary><p>Sim. O vídeo é vertical, de 1 a 2 minutos, e o mesmo arquivo serve pras três plataformas.</p></details>
-        <details><summary>Como eu recebo?</summary><p>Logo depois do pagamento o e-book chega no e-mail que você informar.</p></details>
+        <details><summary>Preciso saber animar ou programar?</summary><p>Não. As cenas já vêm prontas e funcionando. Pra criar cenas novas, você cola os prompts no ChatGPT, ele escreve o código e você só salva o arquivo.</p></details>
+        <details><summary>Precisa instalar algum programa?</summary><p>Não. As cenas abrem direto no Google Chrome. Pra juntar voz e legenda, o guia usa o CapCut, que é gratuito.</p></details>
+        <details><summary>Funciona no ChatGPT grátis?</summary><p>As cenas prontas rodam sem ChatGPT nenhum. Pra criar cenas novas, os prompts funcionam no ChatGPT, mas o código é longo e na versão grátis a resposta às vezes vem cortada. O plano pago deixa tudo mais tranquilo.</p></details>
+        <details><summary>Preciso de um computador potente?</summary><p>Não. Um computador comum, que rode o Chrome bem, dá conta. A gravação da cena precisa ser feita no computador, não no celular.</p></details>
+        <details><summary>Serve pra Reels, TikTok e Shorts?</summary><p>Sim. As cenas gravam na vertical, em 1080x1920, e o mesmo vídeo serve pras três plataformas.</p></details>
+        <details><summary>Como eu recebo?</summary><p>Logo depois do pagamento, o acesso ao kit chega no e-mail que você informar na compra.</p></details>
       </div>
     </div>
   </section>
 
   <section class="final">
     <div class="wrap">
-      <h2>Seu próximo vídeo pode ser o de 1 milhão</h2>
-      <a class="btn" href="#oferta">Quero o e-book</a>
+      <h2>Sua primeira cena 3D pode estar rodando ainda hoje</h2>
+      <a class="btn" href="#oferta">Quero o Kit 3D Pronto</a>
     </div>
   </section>
 </main>
 
-<footer><div class="wrap">Explica em 3D · Todos os direitos reservados</div></footer>
+<footer><div class="wrap">Kit 3D Pronto · Todos os direitos reservados</div></footer>
 
 <div class="promo" id="promo" role="status">
-  <span class="txt">Preço de lançamento: R$ 97 só até domingo</span>
-  <span class="clock" id="promoClock">0d 00:00:00</span>
+  <span class="txt">Seu preço de boas-vindas acaba em</span>
+  <span class="clock" id="promoClock">15:00</span>
   <a href="#oferta">Garantir</a>
 </div>
 
 <div class="bar" id="bar" aria-hidden="true">
-  <div class="p"><span id="barP">12x R$ 10,03</span><small id="barS">ou R$ 97 no Pix</small></div>
-  <a class="btn" href="#oferta" tabindex="-1">Quero o e-book</a>
+  <div class="p"><span id="barP">4x R$ 5,42</span><small id="barS">ou R$ 19,90 no Pix</small></div>
+  <a class="btn" href="#oferta" tabindex="-1">Quero o kit</a>
 </div>
 
 <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Vídeo">
@@ -504,36 +511,48 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
 
 <script>
 
-// ===== PROMOÇÃO DE LANÇAMENTO =====
-// Data real em que o preço sobe. Depois dela a página mostra R$ 297 sozinha.
-// Lembre de mudar o preço na Kiwify no mesmo dia.
-const FIM_PROMO = new Date("2026-10-25T23:59:59-03:00");
-const PARCELA_6X = "10,03";          // valor da parcela em 12x que aparece no checkout da Kiwify
-const PRECO_DEPOIS = "297";
-document.getElementById("parc").textContent = PARCELA_6X;
-document.getElementById("barP").textContent = "12x R$ " + PARCELA_6X;
+// ===== PREÇO DE BOAS-VINDAS (15 minutos por visitante) =====
+// Cada pessoa ganha 15 minutos a partir da primeira visita. Recarregar a página não reinicia.
+// Quando o tempo acaba, a página passa a mostrar o preço normal e o botão leva pro checkout normal.
+// Crie as duas ofertas na Kiwify e cole os links abaixo.
+const CHECKOUT_BOAS_VINDAS = "";   // link da oferta de R$ 19,90
+const CHECKOUT_NORMAL = "";        // link da oferta de R$ 37
+const PRECO_BOAS_VINDAS = "19,90";
+const PRECO_NORMAL = "37";
+const MINUTOS = 15;
+
 const promo = document.getElementById("promo");
 const promoClock = document.getElementById("promoClock");
 const tEls = {}; document.querySelectorAll("[data-t]").forEach(el => tEls[el.dataset.t] = el);
 const pad = n => String(n).padStart(2, "0");
+const buy = document.getElementById("buy");
+["precoNormal1", "precoNormal2"].forEach(id => document.getElementById(id).textContent = PRECO_NORMAL);
+let inicio = 0;
+try { inicio = Number(localStorage.getItem("kit3d_inicio")) || 0; } catch (e) {}
+if (!inicio) { inicio = Date.now(); try { localStorage.setItem("kit3d_inicio", String(inicio)); } catch (e) {} }
+const FIM = inicio + MINUTOS * 60 * 1000;
 let promoAtiva = true;
+if (CHECKOUT_BOAS_VINDAS) buy.href = CHECKOUT_BOAS_VINDAS;
+
 function encerrar() {
   promoAtiva = false;
   promo.hidden = true;
-  ["timer", "timerL", "afterLine"].forEach(id => document.getElementById(id).hidden = true);
-  document.getElementById("launchTag").textContent = "Preço atual";
+  ["timer", "timerL", "afterLine", "oldLine"].forEach(id => document.getElementById(id).hidden = true);
+  document.getElementById("launchTag").textContent = "Preço normal";
   document.getElementById("instX").textContent = "R$";
-  document.getElementById("instV").innerHTML = PRECO_DEPOIS;
-  document.getElementById("cashLine").textContent = "no Pix ou em até 12x no cartão";
-  document.getElementById("barP").textContent = "R$ " + PRECO_DEPOIS;
-  document.getElementById("barS").textContent = "em até 12x no cartão";
+  document.getElementById("instV").textContent = PRECO_NORMAL;
+  document.getElementById("cashLine").textContent = "no Pix ou parcelado no cartão";
+  document.getElementById("barP").textContent = "R$ " + PRECO_NORMAL;
+  document.getElementById("barS").textContent = "parcelado no cartão";
+  if (CHECKOUT_NORMAL) buy.href = CHECKOUT_NORMAL;
+  try { upd(); } catch (e) {}
 }
 function tick() {
-  const ms = FIM_PROMO - Date.now();
+  const ms = FIM - Date.now();
   if (ms <= 0) { encerrar(); return; }
-  const t = Math.floor(ms / 1000), d = Math.floor(t / 86400), h = Math.floor(t % 86400 / 3600), m = Math.floor(t % 3600 / 60), sec = t % 60;
-  tEls.d.textContent = d; tEls.h.textContent = pad(h); tEls.m.textContent = pad(m); tEls.s.textContent = pad(sec);
-  promoClock.textContent = (d ? d + "d " : "") + pad(h) + ":" + pad(m) + ":" + pad(sec);
+  const t = Math.ceil(ms / 1000), m = Math.floor(t / 60), sec = t % 60;
+  tEls.m.textContent = pad(m); tEls.s.textContent = pad(sec);
+  promoClock.textContent = pad(m) + ":" + pad(sec);
   setTimeout(tick, 1000 - (Date.now() % 1000));
 }
 tick();
@@ -541,20 +560,20 @@ tick();
 // ===== MONTE SEU PRIMEIRO VÍDEO =====
 (function () {
   const OBJ = {
-    geladeira: { t: "Como a geladeira gela por dentro", h: "A geladeira não cria frio. Ela tira o calor de dentro." },
+    geladeira: { t: "Como a geladeira gela por dentro", h: "Se a geladeira serve pra gelar, por que a parte de trás dela fica quente?" },
     caixa: { t: "O segredo da boia da caixa d'água", h: "Uma bolinha de plástico impede a sua casa de alagar." },
     disjuntor: { t: "Por que o disjuntor desarma", h: "Esse estalo no quadro de luz pode ter salvado a sua casa." },
     airbag: { t: "Como o airbag abre tão rápido", h: "O airbag abre mais rápido que um piscar de olhos." }
   };
   const TRAVA = {
-    animar: "Você não vai animar nada na mão. Você descreve a cena em palavras e a IA cria o movimento. Está tudo na Etapa 4 do e-book.",
-    programar: "Você não escreve código. O GPT 6 Astra escreve, você copia e cola. Os prompts já vêm prontos no e-book.",
-    tempo: "No método, a voz vem antes da animação. Esse detalhe sozinho corta a maior parte do tempo perdido com ajustes.",
+    animar: "Você não vai animar nada na mão. A cena já vem pronta e animada. Pra criar outras, você descreve em palavras e o ChatGPT cria o movimento.",
+    programar: "Você não escreve código. As cenas já vêm prontas, e pra criar novas o ChatGPT escreve tudo com os prompts do kit. Você só copia e cola.",
+    tempo: "Você não começa do zero. Abre uma cena pronta, troca o que precisa e grava. É isso que corta o tempo de semanas pra horas.",
     aparecer: "O formato é 100% sem rosto. O protagonista é o objeto, e a narração sai de uma voz pronta no CapCut."
   };
   const TEMPO = {
     "2": "Uma meta realista: 1 vídeo a cada duas semanas no começo, acelerando conforme pegar a prática.",
-    "5": "Uma meta realista: 1 vídeo por semana, o mesmo ritmo do plano de 30 dias do e-book.",
+    "5": "Uma meta realista: 1 vídeo por semana, usando as cenas prontas como ponto de partida.",
     "10": "Uma meta realista: 2 vídeos por semana, testando ganchos diferentes pra descobrir o que mais prende."
   };
   const card = document.getElementById("qcard");
@@ -580,6 +599,7 @@ tick();
     document.getElementById("rHook").textContent = "“" + o.h + "”";
     document.getElementById("rTrava").textContent = TRAVA[ans.trava];
     document.getElementById("rTempo").textContent = TEMPO[ans.tempo];
+    document.getElementById("rKit").textContent = ans.obj === "airbag" ? "Você monta essa cena com o cenário base e a biblioteca de objetos, usando os prompts pro ChatGPT." : "Essa cena já vem pronta no kit. É só abrir no Chrome, ajustar e gravar.";
     if (reduce) { result.hidden = false; return; }
     render.hidden = false;
     const fill = document.getElementById("rfill"), pct = document.getElementById("rpct");
@@ -603,11 +623,6 @@ tick();
     show(0);
   });
 })();
-
-// Troque pelo link do seu checkout (Mercado Pago, Kiwify, Hotmart...)
-const CHECKOUT_URL = "https://pay.kiwify.com.br/AR8LCHS";
-const buy = document.getElementById("buy");
-if (CHECKOUT_URL) { buy.href = CHECKOUT_URL; }
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const hero = document.getElementById("heroVid");
