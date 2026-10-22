@@ -443,16 +443,9 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
           </ul>
         </div>
         <div class="price-box">
-          <span class="launch" id="launchTag">Preço de boas-vindas</span>
-          <div class="old" id="oldLine">Preço normal: R$ <span id="precoNormal1">37</span></div>
+          <span class="launch" id="launchTag">Oferta</span>
           <div class="inst"><span class="x" id="instX">4x de</span><span class="v" id="instV"><sup>R$</sup><span id="parc">5,42</span></span></div>
           <div class="price-sub" id="cashLine">ou R$ <span id="precoAtual">19,90</span> à vista no Pix</div>
-          <div class="timer-l" id="timerL">Seu preço de boas-vindas acaba em:</div>
-          <div class="timer" id="timer" aria-live="off">
-            <div><b data-t="m">15</b><span>min</span></div>
-            <div><b data-t="s">00</b><span>seg</span></div>
-          </div>
-          <div class="after" id="afterLine">Quando o tempo zerar, o kit volta pra R$ <span id="precoNormal2">37</span></div>
           <a class="btn" id="buy" href="#oferta">Comprar agora</a>
           <div class="secure">Pagamento seguro · garantia de 7 dias</div>
         </div>
@@ -493,11 +486,6 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
 
 <footer><div class="wrap">Kit 3D Pronto · Todos os direitos reservados</div></footer>
 
-<div class="promo" id="promo" role="status">
-  <span class="txt">Seu preço de boas-vindas acaba em</span>
-  <span class="clock" id="promoClock">15:00</span>
-  <a href="#oferta">Garantir</a>
-</div>
 
 <div class="bar" id="bar" aria-hidden="true">
   <div class="p"><span id="barP">4x R$ 5,42</span><small id="barS">ou R$ 19,90 no Pix</small></div>
@@ -511,51 +499,10 @@ footer{background:var(--ink);color:#8d9aa8;font-size:14px;padding-block:28px}
 
 <script>
 
-// ===== PREÇO DE BOAS-VINDAS (15 minutos por visitante) =====
-// Cada pessoa ganha 15 minutos a partir da primeira visita. Recarregar a página não reinicia.
-// Quando o tempo acaba, a página passa a mostrar o preço normal e o botão leva pro checkout normal.
-// Crie as duas ofertas na Kiwify e cole os links abaixo.
-const CHECKOUT_BOAS_VINDAS = "";   // link da oferta de R$ 19,90
-const CHECKOUT_NORMAL = "";        // link da oferta de R$ 37
-const PRECO_BOAS_VINDAS = "19,90";
-const PRECO_NORMAL = "37";
-const MINUTOS = 15;
-
-const promo = document.getElementById("promo");
-const promoClock = document.getElementById("promoClock");
-const tEls = {}; document.querySelectorAll("[data-t]").forEach(el => tEls[el.dataset.t] = el);
-const pad = n => String(n).padStart(2, "0");
-const buy = document.getElementById("buy");
-["precoNormal1", "precoNormal2"].forEach(id => document.getElementById(id).textContent = PRECO_NORMAL);
-let inicio = 0;
-try { inicio = Number(localStorage.getItem("kit3d_inicio")) || 0; } catch (e) {}
-if (!inicio) { inicio = Date.now(); try { localStorage.setItem("kit3d_inicio", String(inicio)); } catch (e) {} }
-const FIM = inicio + MINUTOS * 60 * 1000;
-let promoAtiva = true;
-if (CHECKOUT_BOAS_VINDAS) buy.href = CHECKOUT_BOAS_VINDAS;
-
-function encerrar() {
-  promoAtiva = false;
-  promo.hidden = true;
-  ["timer", "timerL", "afterLine", "oldLine"].forEach(id => document.getElementById(id).hidden = true);
-  document.getElementById("launchTag").textContent = "Preço normal";
-  document.getElementById("instX").textContent = "R$";
-  document.getElementById("instV").textContent = PRECO_NORMAL;
-  document.getElementById("cashLine").textContent = "no Pix ou parcelado no cartão";
-  document.getElementById("barP").textContent = "R$ " + PRECO_NORMAL;
-  document.getElementById("barS").textContent = "parcelado no cartão";
-  if (CHECKOUT_NORMAL) buy.href = CHECKOUT_NORMAL;
-  try { upd(); } catch (e) {}
-}
-function tick() {
-  const ms = FIM - Date.now();
-  if (ms <= 0) { encerrar(); return; }
-  const t = Math.ceil(ms / 1000), m = Math.floor(t / 60), sec = t % 60;
-  tEls.m.textContent = pad(m); tEls.s.textContent = pad(sec);
-  promoClock.textContent = pad(m) + ":" + pad(sec);
-  setTimeout(tick, 1000 - (Date.now() % 1000));
-}
-tick();
+// ===== CHECKOUT =====
+const CHECKOUT = "https://pay.kiwify.com.br/heKd9rT";
+document.getElementById("buy").href = CHECKOUT;
+const promoAtiva = false;
 
 // ===== MONTE SEU PRIMEIRO VÍDEO =====
 (function () {
@@ -668,7 +615,7 @@ const bar = document.getElementById("bar");
 const heroEl = document.querySelector(".hero");
 const offer = document.getElementById("oferta");
 let pastHero = false, atOffer = false;
-const upd = () => { bar.classList.toggle("show", pastHero && !atOffer); promo.classList.toggle("show", promoAtiva && pastHero && !atOffer); };
+const upd = () => { bar.classList.toggle("show", pastHero && !atOffer);  };
 if ("IntersectionObserver" in window) {
   new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; upd(); }).observe(heroEl);
   new IntersectionObserver(([e]) => { atOffer = e.isIntersecting; upd(); }).observe(offer);
